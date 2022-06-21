@@ -1,0 +1,64 @@
+* {
+    padding: 0;
+    margin: 0;
+    border: 1px solid red;
+}
+
+header {
+    height: 75px;
+    width: 100vw;
+    background-image: linear-gradient(90deg, #3b6ec4, #230255);
+    display: flex;
+    justify-content: center;
+    align-items: center;
+}
+
+h1 {
+    color: white;
+}
+
+main {
+    display: flex;
+    height: calc(100vh - 75px);
+    width: 100vw;
+}
+
+.sideBarContainer {
+    display: flex;
+    flex-wrap: wrap;
+    width: 33%;
+    justify-content: center;
+}
+
+#searchBarContainer {
+    display: flex;
+    flex-direction: column;
+    justify-content: center;
+    height: 25%;
+    width: 100%;
+    margin-left: 5%;
+    margin-right: 5%;
+    border-bottom: black 1px solid;
+}
+
+#searchBarContainer > * {
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-bottom: 5%;
+    height: 25%;
+    border-radius: 10px;
+    padding-left: 10px;
+}
+
+#h2searchDiv {
+    display: flex;
+    justify-content: start;
+    align-items: flex-end;
+}
+
+
+#searchButton {
+    background-color: #2e9aec;
+}
+
+/* MAKE MEDIA QUERY SO WHEN SCREEN IS SMALLER SEARCH IS 100 width */
