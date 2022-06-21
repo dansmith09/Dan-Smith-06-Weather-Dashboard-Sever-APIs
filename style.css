@@ -1,7 +1,7 @@
 * {
     padding: 0;
     margin: 0;
-    border: 1px solid red;
+    /* border: 1px solid red; */
 }
 
 header {
@@ -21,6 +21,8 @@ main {
     display: flex;
     height: calc(100vh - 75px);
     width: 100vw;
+    justify-content: center;
+
 }
 
 .sideBarContainer {
@@ -36,15 +38,16 @@ main {
     justify-content: center;
     height: 25%;
     width: 100%;
-    margin-left: 5%;
-    margin-right: 5%;
+    margin-left: 10px;
+    margin-right: 10px;
     border-bottom: black 1px solid;
+    padding-bottom: 10px;
 }
 
 #searchBarContainer > * {
-    margin-left: 5%;
-    margin-right: 5%;
-    margin-bottom: 5%;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-top: 10px;
     height: 25%;
     border-radius: 10px;
     padding-left: 10px;
@@ -54,11 +57,107 @@ main {
     display: flex;
     justify-content: start;
     align-items: flex-end;
+    flex-wrap: nowrap;
 }
 
+#previousSearches {
+    display: flex;
+    flex-direction: column;
+    justify-content: top;
+    height: 75%;
+    width: 100%;
+    margin-left: 10px;
+    margin-right: 10px;
+    margin-top: 10px;
+}
+
+#previousSearches > * {
+    margin-left: 5%;
+    margin-right: 5%;
+    margin-top: 5%;
+    height: 8%;
+    border-radius: 10px;
+    padding-left: 10px;
+}
+
+.searchResultsContainer {
+    width: 66%;
+    height: calc(100vh - 75px);
+}
+
+.todayResults {
+    height: 25%;
+    margin: 10px;
+    border: black 1px solid;
+}
 
 #searchButton {
     background-color: #2e9aec;
+    color: white;
+}
+
+.weekResults {
+    display: flex;
+    height: 75%;
+    overflow: scroll;
+
+}
+
+h3 {
+    margin-left: 10px;
+}
+h4 {
+    color: white;
+}
+
+.weatherCards {
+    display: flex;
+    flex-direction: column ;
+    margin: 10px;
+    justify-content: space-evenly;
+    text-align: center;
+    color: white;
+    background-color: #283f52;
+    height: 350px;
+    width: 20%;
+}
+
+.weatherCards > * {
+    padding: 10px;
 }
 
 /* MAKE MEDIA QUERY SO WHEN SCREEN IS SMALLER SEARCH IS 100 width */
+
+@media screen and (max-width: 610px) {
+    * {
+        padding: 0;
+        margin: 0;
+    }
+    header {
+        text-align: center;
+    }
+    main {
+        flex-direction: column;
+    }
+    .sideBarContainer {
+        width: 100%;
+        height: 40%;
+        overflow: scroll;
+    }
+    #searchBarContainer {
+        height: 66%;
+        width: 100vw;
+    }
+    .searchResultsContainer {
+        width: 100%;
+        overflow: scroll;
+    }
+
+    #searchButton {
+    }
+    #previousSearches button {
+        height: 50px;
+        margin: 10px;
+        padding: 10px;
+    }
+  }
