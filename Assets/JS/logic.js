@@ -24,7 +24,7 @@ const getCityForecast = (city) => {
                 weatherIcon.setAttribute('src',iconURL);
                 // Renders all current weather info to todayResults section
                 document.getElementById('cityName').innerHTML = city;
-                let today = moment().format('MM-DD-YY');
+                let today = moment().format('DD-MM-YY');
                 document.getElementById('dateToday').innerHTML = "(" + today + ")";
                 document.getElementById('tempToday').innerHTML = "Temp: " + (data.main.temp - 273.15).toFixed(2) + ' °C';
                 document.getElementById('windToday').innerHTML = "Wind: " + data.wind.speed + " M/Hr";
