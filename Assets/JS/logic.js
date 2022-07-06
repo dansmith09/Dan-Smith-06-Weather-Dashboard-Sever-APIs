@@ -8,8 +8,6 @@ const getCityForecast = (city) => {
     fetch(apiURL).then(function (response) {
         if (response.ok) {
             response.json().then(function (data) {
-                // Logs API call to console
-                console.log(data);
                 // if city has not been searched before - add it to search history
                 if (state.previous_search.indexOf(city.trim()) < 0) {
                     state.previous_search.push(city.trim());
@@ -50,8 +48,6 @@ const oneCall = (lat, lon) => {
     fetch(newAPIURL).then(function (response) {
         if(response.ok) {
             response.json().then(function(data) {
-                // Do all the stuff here
-                console.log(data);
                 // Adds UV index to Daily Forcast
                 let UVIndex = data.current.uvi;
                 document.getElementById('UVIndexToday').innerHTML = UVIndex;
