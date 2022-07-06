@@ -21,7 +21,7 @@ main {
     display: flex;
     height: calc(100vh - 75px);
     width: 100vw;
-    justify-content: space-between;
+    justify-content: center;
 
 }
 
@@ -118,7 +118,7 @@ main {
     display: flex;
     height: 75%;
     overflow: scroll;
-
+    justify-content: center;
 }
 
 h3 {
@@ -146,6 +146,34 @@ h4 {
     padding: 5px;
 }
 
+button{
+    cursor: pointer;
+    display: inline-block;
+    position: relative;
+    transition: 0.5s;
+}
+
+button:after {
+    content: '»';
+    position: absolute;
+    opacity: 0;  
+    right: 0px;
+    transition: 0.5s;
+}
+  
+button:hover{
+    padding-right:14px;
+    padding-left:8px;
+    background-image: linear-gradient(90deg, #699cf3, #230255);
+    color: white;
+}
+  
+  button:hover:after {
+    opacity: 1;
+    right: 40px;
+}
+
+/* Shout out to https://www.sliderrevolution.com/resources/css-button-hover-effects/ for some of the cool hover effects */
 
 span {
     color: white;
@@ -175,7 +203,7 @@ span {
 
 /* MAKE MEDIA QUERY SO WHEN SCREEN IS SMALLER SEARCH IS 100 width */
 
-@media screen and (max-width: 610px) {
+@media screen and (max-width: 835px) {
     * {
         padding: 0;
         margin: 0;
@@ -185,6 +213,7 @@ span {
     }
     main {
         flex-direction: column;
+        justify-content: space-between;
     }
     .sideBarContainer {
         width: 100%;
@@ -209,5 +238,11 @@ span {
         height: 50px;
         margin: 10px;
         padding: 10px;
+    }
+  }
+
+  @media screen and (max-width: 655px) {
+    .weekResults {
+        justify-content: start;
     }
   }

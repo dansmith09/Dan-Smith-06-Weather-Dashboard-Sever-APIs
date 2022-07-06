@@ -1,9 +1,7 @@
 // Define the HTML elements we will use in JS
 var APIKey = 'cf4280e902da44b2517b6186d055cd7c';
 
-const getCityForecast = () => {
-    // Defines variable city as the value searched by the user
-    let city = document.getElementById('userCityInput').value;
+const getCityForecast = (city) => {
     // Changes URL to insert city in query parameter
     apiURL = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${APIKey}`;
     // Calls API
@@ -118,28 +116,46 @@ function saveState() {
 
 const renderPreviousSearchList = () => {
     document.getElementById('previousSearches').innerHTML = "";
-
+    // Gets local storage
     loadState();
-
+    // loops through state to create previous search history HTML elements
     for (let i = 0; i < state.previous_search.length; i++) {
+        // defines search history element
         let previousSearchList = document.getElementById('previousSearches');
+        // creates new buttom
         let button = document.createElement('button');
-        button.textContent = state.previous_search[i];
-        button.setAttribute("data-searchTerm", state.previous_search[i]);
+        // Defines the previous search term 
+        let previousSearchTerm = state.previous_search[i]
+        // makes the buttons text content the previous search
+        button.textContent = previousSearchTerm;
+        // Adds event listener with parameter of previousSearchTerm 
+        button.addEventListener("click", () => {
+            getCityForecast(previousSearchTerm);
+        });
+        // appends to the search history element
         previousSearchList.appendChild(button);
     }
 }
 
+const handleSearchButtonClick = () => {
+    // Defines variable city as the value searched by the user
+    let city = document.getElementById('userCityInput').value;
+    // calls get city forcast
+    getCityForecast(city);
+}
+        
 // add event listener to previous searches list that 
 
 // Adds event listener to search button on click
-document.getElementById('searchButton').addEventListener('click', getCityForecast);
-// Adds event listener to 
+document.getElementById('searchButton').addEventListener('click', handleSearchButtonClick);
+// Adds event listener to enter button
 window.addEventListener('keydown', (event) => {
     if (event.key ==='Enter') {
-        getCityForecast();
+        handleSearchButtonClick();
     }
 });
+
+
 
 // On Page Load
 renderPreviousSearchList();
