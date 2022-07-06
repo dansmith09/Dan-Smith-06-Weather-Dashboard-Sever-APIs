@@ -5,8 +5,14 @@
     <meta http-equiv="X-UA-Compatible" content="IE=edge">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Weather Dashboard</title>
-
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Anek+Latin:wght@200&display=swap" rel="stylesheet">
     <link rel="stylesheet" href="style.css">
+    <script
+    type="text/javascript"
+    src="https://cdnjs.cloudflare.com/ajax/libs/moment.js/2.27.0/moment.min.js"
+  ></script>
 </head>
 <body>
     <header>
@@ -29,45 +35,54 @@
             </div>
         </div>
         <div class="searchResultsContainer">
-                <div class="todayResults">
+                <div id="todayResults">
+                    <div id="headingBox">
+                        <h3 id="cityName"></h3>
+                        <h3 id="dateToday"></h3>
+                        <img id="weatherIcon" src="" alt="">
+                    </div>
+                    <p id="tempToday"></p>
+                    <p id="windToday"></p>
+                    <p id="humidityToday"></p>
+                    <p id="UVIndexToday"></p>
 
                 </div>
-                <h3>5 Day Forcast:</h3>
+                <h3>5 Day Forecast:</h3>
                 <div class="weekResults">
                     <div class="weatherCards">
-                        <h4>The Date here</h4>
-                        <i>Icon Here</i>
-                        <p>Temp:</p>
-                        <p>Wind:</p>
-                        <p>Humidity:</p>
+                        <h4 id="dateDay1">The Date here</h4>
+                        <img id="weatherIconDay1" src="" alt="">
+                        <p id="tempDay1">Temp:</p>
+                        <p id="windDay1">Wind:</p>
+                        <p id="humidityDay1">Humidity:</p>
                     </div>
                     <div class="weatherCards">
-                        <h4>The Date here</h4>
-                        <i>Icon Here</i>
-                        <p>Temp:</p>
-                        <p>Wind:</p>
-                        <p>Humidity:</p>
+                        <h4 id="dateDay2">The Date here</h4>
+                        <img id="weatherIconDay3" src="" alt="">
+                        <p id="tempDay2">Temp:</p>
+                        <p id="windDay2">Wind:</p>
+                        <p id="humidityDay2">Humidity:</p>
                     </div>
                     <div class="weatherCards">
-                        <h4>The Date here</h4>
-                        <i>Icon Here</i>
-                        <p>Temp: <span>Some actual Text</span></p>
-                        <p>Wind:</p>
-                        <p>Humidity:</p>
+                        <h4 id="dateDay3">The Date here</h4>
+                        <img id="weatherIconDay3" src="" alt="">
+                        <p id="tempDay3">Temp:</p>
+                        <p id="windDay3">Wind:</p>
+                        <p id="humidityDay3">Humidity:</p>
                     </div>
                     <div class="weatherCards">
-                        <h4>The Date here</h4>
-                        <i>Icon Here</i>
-                        <p>Temp:</p>
-                        <p>Wind:</p>
-                        <p>Humidity:</p>
+                        <h4 id="dateDay4">The Date here</h4>
+                        <img id="weatherIconDay4" src="" alt="">
+                        <p id="tempDay4">Temp:</p>
+                        <p id="windDay4">Wind:</p>
+                        <p id="humidityDay4">Humidity:</p>
                     </div>
                     <div class="weatherCards">
-                        <h4>The Date here</h4>
-                        <i>Icon Here</i>
-                        <p>Temp:</p>
-                        <p>Wind:</p>
-                        <p>Humidity:</p>
+                        <h4 id="dateDay5">The Date here</h4>
+                        <img id="weatherIconDay5" src="" alt="">
+                        <p id="tempDay5">Temp:</p>
+                        <p id="windDay5">Wind:</p>
+                        <p id="humidityDay5">Humidity:</p>
                     </div>
                 </div>
         </div>
