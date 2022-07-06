@@ -1,12 +1,9 @@
 // Define the HTML elements we will use in JS
 var APIKey = 'cf4280e902da44b2517b6186d055cd7c';
 
-var apiURL = `https://api.openweathermap.org/data/2.5/weather?q=Sydney&appid=${APIKey}`;
-// Get data from API
-// Make html content based on API data
-// Save previous searches to storage
-
-var getCityForecast = function(city) {
+const getCityForecast = () => {
+    // Defines variable city as the value searched by the user
+    let city = document.getElementById('userCityInput').value;
     // Changes URL to insert city in query parameter
     apiURL = `https://api.openweathermap.org/data/2.5/weather?q=${city}&appid=${APIKey}`;
     // Calls API
@@ -15,12 +12,18 @@ var getCityForecast = function(city) {
             response.json().then(function (data) {
                 // Logs API call to console
                 console.log(data);
+                // if city has not been searched before - add it to search history
+                if (state.previous_search.indexOf(city.trim()) < 0) {
+                    state.previous_search.push(city.trim());
+                    saveState();
+                    renderPreviousSearchList();
+                }
                 // gets icon code for current weather
-                var iconCode = data.weather[0].icon;
+                let iconCode = data.weather[0].icon;
                 // concatenates code into url
-                var iconURL = "http://openweathermap.org/img/wn/" + iconCode + "@2x.png";
+                let iconURL = "http://openweathermap.org/img/wn/" + iconCode + "@2x.png";
                 // Gets weather icon
-                var weatherIcon = document.getElementById('weatherIcon');
+                let weatherIcon = document.getElementById('weatherIcon');
                 // Sets icons source to iconURL to render icon
                 weatherIcon.setAttribute('src',iconURL);
                 // Gets city name and changes heading to the city name
@@ -28,18 +31,15 @@ var getCityForecast = function(city) {
                 var today = moment().format('MM-DD-YY');
                 document.getElementById('dateToday').innerHTML = "(" + today + ")";
                 document.getElementById('tempToday').innerHTML = "Temp: " + (data.main.temp - 273.15).toFixed(2) + ' °C';
-                document.getElementById('windToday').innerHTML = "Wind: " + data.wind.speed;
+                document.getElementById('windToday').innerHTML = "Wind: " + data.wind.speed + " M/Hr";
                 document.getElementById('humidityToday').innerHTML = "Humidity: " + data.main.humidity;
-                document.getElementById('UVIndexToday').innerHTML = "UV Index: " + city;
                 // Calls futureWeather function with long and lat as parameters
                 var lon = data.coord.lon;
                 var lat = data.coord.lat;
                 oneCall(lat, lon);
-                // Logs API URL
-                console.log(`api.openweathermap.org/data/2.5/forecast/daily?lat=${lat}&lon=${lon}&cnt=5&appid=${APIKey}`);
-
             });
         } else {
+            alert('Invalid city name. Please check your spelling and try again.')
             console.log("Not a good response there must be an error eeeek!");
         }
     });
@@ -53,13 +53,95 @@ const oneCall = (lat, lon) => {
             response.json().then(function(data) {
                 // Do all the stuff here
                 console.log(data);
-                console.log(data.daily[0].wind_speed);
+                // Add UV index to Daily Forcast
+                let UVIndex = data.current.uvi;
+                document.getElementById('UVIndexToday').innerHTML = UVIndex;
+                document.getElementById('UVIndexToday').setAttribute('class',getUVIndexStyling(UVIndex));
                 // First Block
-
+                for (let i = 0; i < 5; i++) {
+                    // Changes Date to relevant day
+                    document.getElementById("dateDay" + (i + 1)).textContent = moment().add(i + 1, 'd').format('DD-MM-YY');
+                    // gets icon code for current weather
+                    let iconCode = data.daily[i].weather[0].icon;
+                    // concatenates code into url
+                    let iconURL = "http://openweathermap.org/img/wn/" + iconCode + "@2x.png";
+                    // Sets the src of the icon element to iconURL
+                    document.getElementById('weatherIconDay' + (i + 1)).setAttribute('src',iconURL);
+                    // Renders Temp on page
+                    let temp = (data.daily[i].temp.day - 273.15).toFixed(2)
+                    document.getElementById('tempDay' + (i + 1)).textContent = `Temp:\n${temp} °C`;
+                    // Renders Wind on page
+                    document.getElementById('windDay' + (i + 1)).textContent = 'Wind:\n' + data.daily[i].wind_speed + ' M/Hr';
+                    // Renders Humidity
+                    document.getElementById('humidityDay' + (i + 1)).textContent = 'Humidity:\n' + data.daily[i].humidity;
+                }
             })
         }
+        document.getElementById('userCityInput').value = "";
     })
+    document.getElementById("searchResultsContainer").style.visibility = "visible";
+
+}
+// Function to get UV styling 
+const getUVIndexStyling = (value) => {
+    if (value <= 2) {
+        return 'low';
+    } else if (value <= 5) {
+        return 'moderate';
+    } else if (value <= 7) {
+        return 'high';
+    } else if (value <= 10) {
+        return 'very-high';
+    } else {
+        return 'extreme';
+    }
 }
 
+// Local Storage Functions
+let state = {
+    previous_search: []
+};
 
-// Search Button Function 
+function loadState() {
+    let json = localStorage.getItem("Weather-searches");
+
+    if (json !== null) {
+        state = JSON.parse(json);
+    }
+}
+
+function saveState() {
+    let json = JSON.stringify(state);
+
+    localStorage.setItem("Weather-searches", json);
+}
+
+const renderPreviousSearchList = () => {
+    document.getElementById('previousSearches').innerHTML = "";
+
+    loadState();
+
+    for (let i = 0; i < state.previous_search.length; i++) {
+        let previousSearchList = document.getElementById('previousSearches');
+        let button = document.createElement('button');
+        button.textContent = state.previous_search[i];
+        button.setAttribute("data-searchTerm", state.previous_search[i]);
+        previousSearchList.appendChild(button);
+    }
+}
+
+// add event listener to previous searches list that 
+
+// Adds event listener to search button on click
+document.getElementById('searchButton').addEventListener('click', getCityForecast);
+// Adds event listener to 
+window.addEventListener('keydown', (event) => {
+    if (event.key ==='Enter') {
+        getCityForecast();
+    }
+});
+
+// On Page Load
+renderPreviousSearchList();
+// Results are hidden then when data loads display results
+document.getElementById("searchResultsContainer").style.visibility = "hidden";
