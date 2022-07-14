@@ -1,35 +1,44 @@
-# Dan-Smith-06-Weather-Dashboard-Sever-APIs
+# Dan-Smith-09-README-Generator-NodeJS
 
-![](./Assets/Weather-Dashboard.gif)
+
 
 **Description**
 
-This weather dashboard application allows users to type in a city name and retreive detailed information about the current 
-weather and future forcasts based on their city input.
+This Node JS application generates a README.md file based on responses given by a user.
 
-When the user enters a valid city name, the information will render on screen and their search will be added to the previous searches section
+To start the program inquirer needs to be installed. 
 
-A special feature in the application is the UV index section. You will notice that the UV index is conditionally formatted to warn the user
-about potentially extreme radiation levels. The formatting starts with green at the lowest UV levels and approaches red the more extreme the 
-levels are. It is based on the below link
-https://www.cancer.org.au/cancer-information/causes-and-prevention/sun-safety/uv-index
+Once all dependencies have been installed, navigate to the directory in terminal and run:
 
-Made using:
+```
+node index.js
+```
 
-- HTML
-- CSS
-- JavaScript
-- Moment.js
-- Openweather API
+The video below shows the functionality of the application.
 
-**Website Gif Example**
-
-The application is also responsive to smaller screen sizes
-
-![](./Assets/Weather-Dashboard-mobile.gif)
+https://user-images.githubusercontent.com/105022434/179005930-310e4197-d95c-43fd-9bec-a8d5866cad0a.mp4
 
 
-**Mockup Website Link**
+Once all prompts have been satisfied, the application generates a file titles Example-README.md.
 
-Website link:
-https://dansmith09.github.io/Dan-Smith-06-Weather-Dashboard-Sever-APIs/
+The markdown file includes;
+
+- An icon representing the type of license relevant to the project 
+
+- A table of contents with clickable links that scroll to the relevant headings
+
+- A link to the users GitHub profile
+
+The below video shows the functionality of the application's output.
+
+
+https://user-images.githubusercontent.com/105022434/179010561-497256d7-afe0-452a-9fe3-636af115f4fd.mp4
+
+
+
+
+**Application Output**
+
+Application README Output:
+
+https://github.com/dansmith09/Dan-Smith-09-README-Generator-NodeJS/blob/main/Develop/Example-README.md
